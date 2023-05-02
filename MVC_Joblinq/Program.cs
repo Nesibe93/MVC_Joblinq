@@ -1,9 +1,15 @@
+﻿using Microsoft.EntityFrameworkCore;
+using MVC_Joblinq.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-var app = builder.Build();
+//DB Bağlantısı için - appSettings.json dosyası altındaki Connection tanımı için
+builder.Services.AddDbContext<DBJoblinqContext>(Options => Options.UseSqlServer(builder.Configuration.GetConnectionString("Connection")));
+
+var app = builder.Build(); // Uygulamanın yaratıldığı kısım
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
