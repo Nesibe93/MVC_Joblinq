@@ -15,7 +15,8 @@ namespace MVC_Joblinq.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var data = DBJoblinqContext.Sectors.ToList();
+            return View(data);
         }
 
         [HttpGet]
