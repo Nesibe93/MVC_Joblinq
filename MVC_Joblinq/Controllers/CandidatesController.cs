@@ -158,5 +158,9 @@ namespace MVC_Joblinq.Controllers
         {
           return (_context.Candidates?.Any(e => e.CandidateId == id)).GetValueOrDefault();
         }
+        public IActionResult Profil()
+        {
+            return View();
+        }
     }
 }

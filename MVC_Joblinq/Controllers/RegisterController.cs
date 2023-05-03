@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using MVC_Joblinq.Models;
 using MVC_Joblinq.ViewModels;
 
@@ -17,9 +19,16 @@ namespace MVC_Joblinq.Controllers
         [HttpGet] // Sayfayı getir
         public IActionResult Register()
         {
+
+           ViewBag.usertype = new SelectList(new List<UserType>()
+            {
+                new(){Data="K",Value="Kullanıcı"},
+                 new(){Data="S",Value= "Şirket"},
+                }, "Data", "Value");
+
             return View();
         }
-        [HttpPost]
+
         //public IActionResult Register(User user)
         //{
         //    // View tarafında girilen bilgilerin Veritabanı tarafına atanması
@@ -36,25 +45,15 @@ namespace MVC_Joblinq.Controllers
         //    DBJoblinqContext.SaveChanges();
 
         //    return RedirectToAction("index","Home");
-            
+
         //}
+        [HttpPost]
         public IActionResult Register(RegisterVM register)
         {
-            // View tarafında girilen bilgilerin Veritabanı tarafına atanması
-            var data = new User()
-            {
-                UserEmail = register.UserEmail,
-                UserPassword = register.UserPassword,
-                UserType = register.UserType
-            };
-            // Verilerin database e yazılması
-            // Burada benim DBContext i kullanarak yazma işlemi gerçekleşecek.Bu yüzden en başlangıca bu tanımı yapmak gerekiyor(Constructor ile)
-
-            DBJoblinqContext.Users.Add(data);
-            DBJoblinqContext.SaveChanges();
-
-            return RedirectToAction("index", "Home");
-
+            
+        
+            return View();
+        }
         }
     }
-}
+
